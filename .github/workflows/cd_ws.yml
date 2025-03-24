@@ -1,5 +1,5 @@
 ---
-    name: Continuous Deployment Backend
+    name: Continuous Deployment ws
     on:
       push:
         branches: [ main ]
