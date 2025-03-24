@@ -27,4 +27,4 @@
               push: true
               tags: iopankaj/user-app-web:${{ github.sha }}
               build-args: |
-                - DATABASE_URL: ${{ secrets.DATABASE_URL }}
+                DATABASE_URL=${{ secrets.DATABASE_URL }}
