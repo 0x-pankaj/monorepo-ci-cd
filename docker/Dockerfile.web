@@ -1,5 +1,6 @@
 FROM oven/bun:1
 ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 
 WORKDIR /usr/src/app
 
@@ -18,8 +19,8 @@ COPY ./apps/web ./apps/web
 RUN bun install
 COPY ./apps/web ./apps/web
 # RUN bun db:migrate
-RUN DATABASE_URL=${DATABASE_URL} bun db:generate
-RUN DATABASE_URL=${DATABASE_URL} bun run build 
+RUN bun db:generate
+RUN bun run build 
 
 
 
