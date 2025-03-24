@@ -2,7 +2,7 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
-ARG DB_URL
+ARG DATABASE_URL
 COPY ./packages ./packages
 
 COPY ./bun.lock ./bun.lock
@@ -19,7 +19,7 @@ RUN bun install
 COPY ./apps/web ./apps/web
 # RUN bun db:migrate
 RUN bun db:generate
-RUN DB_URL=${DATABASE_URL} bun run build 
+RUN DATABASE_URL=${DATABASE_URL} bun run build 
 
 
 
