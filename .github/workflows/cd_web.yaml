@@ -29,4 +29,4 @@
               push: true
               tags: iopankaj/user-app-web:${{ github.sha }}
               secrets: |
-                 DB_URL=${{ secrets.DB_URL }}
+                id=DB_URL,env=DATABASE_URL

@@ -18,10 +18,10 @@ RUN bun install
 COPY ./apps/web ./apps/web
 
 RUN --mount=type=secret,id=DB_URL \
-    sh -c 'export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
-    echo "$DATABASE_URL" && \
-    bun db:generate && \
-    bun run build'
+    export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
+    bun install && \
+    bun run db:generate && \
+    bun run web:build
 
 EXPOSE 3000
 
