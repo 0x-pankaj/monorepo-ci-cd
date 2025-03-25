@@ -19,7 +19,6 @@ COPY ./apps/web ./apps/web
 
 RUN --mount=type=secret,id=DB_URL \
     export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
-    bun install && \
     bun run db:generate && \
     bun run web:build
 
