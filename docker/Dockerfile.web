@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.4
+
 FROM oven/bun:1
 
 WORKDIR /usr/src/app
@@ -13,13 +13,14 @@ COPY ./package*.json ./package*.json
 
 COPY turbo.json turbo.json
 
+COPY ./apps/web ./apps/web
 
 RUN bun install
 
-COPY ./apps/web ./apps/web
 
 RUN --mount=type=secret,id=DB_URL \
-    export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
+export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
+    bun install && \
     bun run db:generate && \
     bun run web:build
 
