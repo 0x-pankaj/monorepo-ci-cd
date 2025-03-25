@@ -1,5 +1,6 @@
 
 FROM oven/bun:1
+ARG DATABASE_URL
 
 WORKDIR /usr/src/app
 
@@ -18,12 +19,8 @@ COPY ./apps/web ./apps/web
 RUN bun install
 
 
-RUN --mount=type=secret,id=DB_URL \
-    export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
-    echo "DATABASE_URL: $DATABASE_URL" && \
-    bun install && \
-    bun run db:generate && \
-    bun run web:build
+RUN DATABASE_URL=$DATABASE_URL bun run db:generate
+RUN DATABASE_URL=$DATABASE_URL bun run web:build
 
 EXPOSE 3000
 
