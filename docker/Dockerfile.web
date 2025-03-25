@@ -19,7 +19,6 @@ RUN bun install
 
 
 RUN --mount=type=secret,id=DB_URL \
-    ls -la /run/secrets && \
     export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
     echo "DATABASE_URL: $DATABASE_URL" && \
     bun install && \
