@@ -12,8 +12,6 @@ COPY ./package*.json ./package*.json
 
 COPY turbo.json turbo.json
 
-COPY ./apps/ws ./apps/ws
-
 RUN bun install
 RUN bun db:generate 
 
