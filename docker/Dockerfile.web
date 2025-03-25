@@ -1,6 +1,4 @@
 FROM oven/bun:1
-ARG DATABASE_URL
-ENV DATABASE_URL=${DATABASE_URL}
 
 WORKDIR /usr/src/app
 
@@ -14,16 +12,15 @@ COPY ./package*.json ./package*.json
 
 COPY turbo.json turbo.json
 
-COPY ./apps/web ./apps/web
 
 RUN bun install
+
 COPY ./apps/web ./apps/web
-# RUN bun db:migrate
-RUN bun db:generate
-RUN bun run build 
 
-
-
+RUN --mount=type=secret, id=DB_URL \
+    export DATABASE_URL=$(cat /run/secrets/DB_URL) && \
+    bun db:generate && \
+    bun run build
 
 EXPOSE 3000
 

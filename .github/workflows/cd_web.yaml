@@ -7,6 +7,8 @@
     jobs:
       build:
         runs-on: ubuntu-latest
+        env:
+          DOCKER_BUILDKIT: 1
         steps:
           - name: Checkout the code 
             uses: actions/checkout@v2
@@ -27,4 +29,4 @@
               push: true
               tags: iopankaj/user-app-web:${{ github.sha }}
               build-args: |
-                DATABASE_URL=${{ secrets.DATABASE_URL }}
+                id=DB_URL, env=DATABASE_URL
