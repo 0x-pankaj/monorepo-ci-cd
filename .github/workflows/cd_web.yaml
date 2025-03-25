@@ -28,5 +28,5 @@
               file: ./docker/Dockerfile.web
               push: true
               tags: iopankaj/user-app-web:${{ github.sha }}
-              build-args: |
+              secrets: |
                 id=DB_URL, env=DATABASE_URL
