@@ -3,15 +3,14 @@
     on:
       push:
         branches: [ main ]
-    
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
     
     jobs:
       build:
         runs-on: ubuntu-latest
         env:
           DOCKER_BUILDKIT: 1
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         steps:
           - name: Checkout the code 
             uses: actions/checkout@v2
@@ -32,4 +31,4 @@
               push: true
               tags: iopankaj/user-app-web:${{ github.sha }}
               secrets: |
-                id=DB_URL,env=DATABASE_URL
+                DATABASE_URL=${{ secrets.DATABASE_URL }}
